@@ -1,0 +1,34 @@
+# Compiled Directories
+target/
+bin/
+dist/
+
+# Node Modules
+node_modules/
+npm-debug.log
+
+# Package Files
+*.jar
+*.war
+*.ear
+*.zip
+*.class
+
+# State directories
+.serverless/
+.terraform/
+terraform.plan
+terraform.tfstate.backup
+
+#Netbeans
+nbproject/
+nbactions.xml
+nb-configuration.xml
+
+#Eclipse
+.settings/
+.project
+.classpath
+
+#Local only tests
+src/test.ts
