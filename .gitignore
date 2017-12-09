@@ -1,7 +1,6 @@
 # Compiled Directories
 target/
 bin/
-dist/
 
 # Node Modules
 node_modules/
