@@ -2,15 +2,16 @@
   "name": "codicom-js",
   "version": "1.0.0",
   "description": "A common set of utilities used in Codification.org projects.",
-  "main": "./dist/index.js",
+  "main": "./lib/index.js",
+  "types": "./lib/index",
   "scripts": {
-    "run": "ts-node ./src/index.ts",
-    "prepublishOnly": "tsc --declaration -p ./ --outDir dist/"
+    "prepublishOnly": "tsc"
   },
   "repository": "git@bitbucket.org:billyboingo/codicom-js.git",
   "author": "William Weiss <william@codification.org>",
   "license": "Apache 2.0",
   "private": true,
+  "files": ["lib/"],
   "dependencies": {
     "aws-cloudfront-sign": "^2.2.0",
     "jwt-decode": "^2.2.0",

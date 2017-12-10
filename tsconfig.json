@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "lib",
     "sourceMap": false,
     "noImplicitAny": false,
     "module": "commonjs",
+    "declaration": true,
     "target": "es5",
-    "lib": ["es5",
-      "es2015.promise","dom"
-    ]
+    "lib": ["es5", "es2015.promise", "dom"]
   },
+  "files": ["./src/index.ts"],
   "include": ["src"]
 }
