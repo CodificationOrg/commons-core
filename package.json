@@ -1,12 +1,11 @@
 {
   "name": "codicom-js",
   "version": "1.0.0",
-  "description":
-    "A common set of utilities used in Codification.org projects.",
-  "main": "dist/index.js",
+  "description": "A common set of utilities used in Codification.org projects.",
+  "main": "./dist/index.js",
   "scripts": {
     "run": "ts-node ./src/index.ts",
-    "prepublishOnly": "tsc -p ./ --outDir dist/"
+    "prepublishOnly": "tsc --declaration -p ./ --outDir dist/"
   },
   "repository": "git@bitbucket.org:billyboingo/codicom-js.git",
   "author": "William Weiss <william@codification.org>",
