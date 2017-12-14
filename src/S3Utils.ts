@@ -15,6 +15,7 @@ import { S3, AWSError } from 'aws-sdk';
 import { Observable, Observer } from 'rxjs';
 import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
+import { defaultIfEmpty } from 'rxjs/operators/defaultIfEmpty';
 
 import { CodicomUtils } from './CodicomUtils';
 
@@ -53,7 +54,7 @@ export class S3Utils {
   }
 
   public saveJSON<T>(key: string, obj: T): Observable<boolean> {
-    return this.saveText(key,obj,'application/json');
+    return this.saveText(key, obj, 'application/json');
   }
 
   public saveText<T>(
@@ -131,9 +132,10 @@ export class S3Utils {
     return rval;
   }
 
-  public load<T>(key: string): Observable<T> {
+  public load<T>(key: string, defaultValue?: T): Observable<T> {
     return this.getBody(key).pipe(
-      map((body: S3.Body) => JSON.parse(body.toString()))
+      map((body: S3.Body) => JSON.parse(body.toString())),
+      defaultIfEmpty(defaultValue)
     );
   }
 

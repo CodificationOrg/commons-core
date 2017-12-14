@@ -12,7 +12,7 @@ export declare class S3Utils {
     private save<T>(key, request);
     remove(key: string): Observable<boolean>;
     removeAll(keys: string[]): Observable<boolean>;
-    load<T>(key: string): Observable<T>;
+    load<T>(key: string, defaultValue?: T): Observable<T>;
     getBody(key: string): Observable<S3.Body>;
     getKeys(prefix: string): Observable<string[]>;
     getObjects(prefix: string): Observable<S3.Object[]>;
