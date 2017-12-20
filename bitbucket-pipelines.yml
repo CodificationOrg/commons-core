@@ -1,0 +1,12 @@
+image: billyboingo/docker-pipelines:node
+
+pipelines:
+
+  branches:
+    dev:
+      - step:
+          caches:
+            - node
+          script:
+            - yarn
+            - yarn test
