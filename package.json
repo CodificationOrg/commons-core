@@ -1,18 +1,20 @@
 {
-  "name": "codicom-js",
+  "name": "@codificationorg/commons",
   "version": "1.0.0",
-  "description": "A common set of utilities used in Codification.org projects.",
-  "main": "./lib/index.js",
+  "description": "A library of common utilities used in Codification.org projects.",
   "types": "./lib/index",
   "scripts": {
-    "test": "jasmine-ts \"src/**/*.spec.ts\"",
-    "prepublishOnly": "rimraf \"lib/**\" && tsc"
+    "test": "mocha -r ts-node/register src/**/*.spec.ts",
+    "clean": "rimraf \"lib/**\"",
+    "prepublishOnly": "yarn clean && tsc"
   },
-  "repository": "git@bitbucket.org:billyboingo/codicom-js.git",
+  "repository": "git@bitbucket.org:codificationorg/commons.git",
   "author": "William Weiss <william@codification.org>",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "private": true,
-  "files": ["lib/"],
+  "files": [
+    "lib/"
+  ],
   "dependencies": {
     "aws-cloudfront-sign": "^2.2.0",
     "cheerio": "^1.0.0-rc.2",
@@ -24,12 +26,15 @@
   },
   "devDependencies": {
     "@types/aws-lambda": "0.0.15",
-    "@types/jasmine": "^2.8.2",
+    "@types/chai": "^4.0.10",
+    "@types/mocha": "^2.2.44",
     "@types/moment-timezone": "^0.5.0",
     "@types/node": "^8.0.16",
     "aws-sdk": "^2.89.0",
-    "jasmine-ts": "^0.2.1",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
     "rimraf": "^2.6.2",
+    "ts-node": "^4.0.2",
     "tslint": "^5.7.0",
     "typescript": "^2.6.2"
   }
