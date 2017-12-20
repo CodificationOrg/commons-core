@@ -17,9 +17,12 @@ import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
 import { defaultIfEmpty } from 'rxjs/operators/defaultIfEmpty';
 
-import { CodicomUtils } from './CodicomUtils';
+import { CodicomUtils } from '../CodicomUtils';
+import { LoggerFactory } from '../logging/LoggerFactory';
 
-export class S3Utils {
+export class S3Bucket {
+  private LOG = LoggerFactory.getLogger('S3Bucket');
+
   private s3: S3 = new S3();
   private dataBucket: string;
 
@@ -43,7 +46,7 @@ export class S3Utils {
         if (err) {
           observer.next(false);
           if (err.code !== 'Not Found') {
-            console.log(`Unexpected error checking for key[${key}]: `, err);
+            this.LOG.error(`Unexpected error checking for key[${key}]: `, err);
           }
         } else {
           observer.next(true);
@@ -83,7 +86,7 @@ export class S3Utils {
     return Observable.create((observer: Observer<boolean>) => {
       this.s3.putObject(request, (err: AWSError, data: PutObjectOutput) => {
         if (err) {
-          console.log(`Failed to store key[${key}]: `, err);
+          this.LOG.error(`Failed to store key[${key}]: `, err);
           observer.next(false);
         } else {
           observer.next(true);
@@ -118,7 +121,7 @@ export class S3Utils {
           request,
           (err: AWSError, data: DeleteObjectsOutput) => {
             if (err) {
-              console.log(`Failed to delete: `, err);
+              this.LOG.error(`Failed to delete: `, err);
               observer.next(false);
             } else {
               observer.next(true);
@@ -150,7 +153,7 @@ export class S3Utils {
           observer.next(data.Body);
           observer.complete();
         } else {
-          console.error(`Error loading S3 object[${key}]: `, err);
+          this.LOG.error(`Error loading S3 object[${key}]: `, err);
           observer.complete();
         }
       });
@@ -174,11 +177,11 @@ export class S3Utils {
       Bucket: this.dataBucket,
       Prefix: prefix
     };
-    //console.log('Request: ', request);
+    this.LOG.trace('Sending S3 listObjects request: ', request);
     return Observable.create((observer: Observer<S3.Object[]>) => {
       this.s3.listObjects(request, (err, data) => {
         if (!err) {
-          // console.log('Data: ', data);
+          this.LOG.trace('S3 listObjects response: ', data);
           let rval: S3.Object[] = [];
           for (const entry of data.Contents) {
             rval.push(entry);
@@ -186,7 +189,7 @@ export class S3Utils {
           observer.next(rval);
           observer.complete();
         } else {
-          console.log('Error getting existing s3 objects: ', err);
+          this.LOG.error('Error getting existing s3 objects: ', err);
           observer.complete();
         }
       });

@@ -7,14 +7,17 @@ import { map } from 'rxjs/operators';
 import * as cf from 'aws-cloudfront-sign';
 import { SignatureOptions } from 'aws-cloudfront-sign';
 
-import { S3Utils } from './S3Utils';
-import { CodicomUtils } from './CodicomUtils';
+import { S3Bucket } from './S3Bucket';
+import { CodicomUtils } from '../CodicomUtils';
+import { LoggerFactory } from '../logging/LoggerFactory';
 
 export class CloudFrontUtils {
+  private LOG = LoggerFactory.getLogger('CloudFrontUtils');
+
   public static ENV_BUCKET = 'KEY_BUCKET_NAME';
   public static ENV_KEY_PAIR_ID = 'KEY_PAIR_ID';
 
-  private s3: S3Utils = new S3Utils();
+  private s3: S3Bucket = new S3Bucket();
   private keyPairId: string;
   private privateKey: string;
 
@@ -69,10 +72,8 @@ export class CloudFrontUtils {
     privateKey: string,
     expiration?: Moment
   ): string {
-    console.log(
-      `Creating policy query string params for url [${
-        url
-      }] with expiration of: [${expiration}]`
+    this.LOG.debug(
+      `Creating policy query string params for url [${url}] with expiration of: [${expiration}]`
     );
     const rval = cf.getSignedUrl(url, this.toOpts(privateKey, expiration));
     return rval.substring(rval.indexOf('Policy='));

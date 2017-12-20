@@ -1,6 +1,7 @@
 import { Moment } from 'moment';
 import { Observable } from 'rxjs';
 export declare class CloudFrontUtils {
+    private LOG;
     static ENV_BUCKET: string;
     static ENV_KEY_PAIR_ID: string;
     private s3;

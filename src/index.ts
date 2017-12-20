@@ -1,5 +1,5 @@
-export { CloudFrontUtils } from './CloudFrontUtils';
+export { CloudFrontUtils } from './aws/CloudFrontUtils';
 export { CodicomUtils } from './CodicomUtils';
-export { CognitoUserData } from './CognitoUserData';
-export { LambdaUtils } from './LambdaUtils';
-export { S3Utils } from './S3Utils';
+export { CognitoUserData } from './aws/CognitoUserData';
+export { LambdaUtils } from './aws/LambdaUtils';
+export { S3Bucket } from './aws/S3Bucket';

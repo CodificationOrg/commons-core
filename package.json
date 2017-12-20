@@ -5,7 +5,8 @@
   "main": "./lib/index.js",
   "types": "./lib/index",
   "scripts": {
-    "prepublishOnly": "tsc"
+    "test": "jasmine-ts \"src/**/*.spec.ts\"",
+    "prepublishOnly": "rimraf \"lib/**\" && tsc"
   },
   "repository": "git@bitbucket.org:billyboingo/codicom-js.git",
   "author": "William Weiss <william@codification.org>",
@@ -14,17 +15,22 @@
   "files": ["lib/"],
   "dependencies": {
     "aws-cloudfront-sign": "^2.2.0",
+    "cheerio": "^1.0.0-rc.2",
     "jwt-decode": "^2.2.0",
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
-    "rxjs": "^5.5.2"
+    "rxjs": "^5.5.2",
+    "web-request": "^1.0.7"
   },
   "devDependencies": {
     "@types/aws-lambda": "0.0.15",
+    "@types/jasmine": "^2.8.2",
     "@types/moment-timezone": "^0.5.0",
     "@types/node": "^8.0.16",
     "aws-sdk": "^2.89.0",
+    "jasmine-ts": "^0.2.1",
+    "rimraf": "^2.6.2",
     "tslint": "^5.7.0",
-    "typescript": "^2.6"
+    "typescript": "^2.6.2"
   }
 }

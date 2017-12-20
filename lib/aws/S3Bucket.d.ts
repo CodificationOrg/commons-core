@@ -1,6 +1,7 @@
 import { S3 } from 'aws-sdk';
 import { Observable } from 'rxjs';
-export declare class S3Utils {
+export declare class S3Bucket {
+    private LOG;
     private s3;
     private dataBucket;
     constructor(dataBucket?: string);
