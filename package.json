@@ -1,14 +1,13 @@
 {
   "name": "@codificationorg/commons",
   "version": "1.0.0",
-  "description":
-    "A library of common utilities used in Codification.org projects.",
+  "description": "A library of common utilities used in Codification.org projects.",
   "homepage": "https://bitbucket.org/codificationorg/commons",
   "bugs": "https://bitbucket.org/codificationorg/commons/issues",
   "main": "./lib/index.js",
   "types": "./lib/index",
   "scripts": {
-    "test": "mocha -r ts-node/register src/**/*.spec.ts",
+    "test": "tape -r ts-node/register src/**/*.spec.ts",
     "clean": "rimraf \"lib/**\"",
     "prepublishOnly": "yarn clean && tsc"
   },
@@ -16,9 +15,12 @@
   "author": "William Weiss",
   "license": "Apache-2.0",
   "private": true,
-  "files": ["lib/"],
+  "files": [
+    "lib/"
+  ],
   "dependencies": {
     "aws-cloudfront-sign": "^2.2.0",
+    "aws-sdk": "^2.173.0",
     "cheerio": "^1.0.0-rc.2",
     "jwt-decode": "^2.2.0",
     "moment": "^2.18.1",
@@ -28,14 +30,11 @@
   },
   "devDependencies": {
     "@types/aws-lambda": "0.0.15",
-    "@types/chai": "^4.0.10",
-    "@types/mocha": "^2.2.44",
     "@types/moment-timezone": "^0.5.0",
     "@types/node": "^8.0.16",
-    "aws-sdk": "^2.89.0",
-    "chai": "^4.1.2",
-    "mocha": "^4.0.1",
+    "@types/tape": "^4.2.31",
     "rimraf": "^2.6.2",
+    "tape": "^4.8.0",
     "ts-node": "^4.0.2",
     "tslint": "^5.7.0",
     "typescript": "^2.6.2"

@@ -1,32 +1,37 @@
-import { LoggerFactory } from './LoggerFactory';
-import { Logger } from './Logger';
-import { Level } from './Level';
-import { expect } from 'chai';
+import { LoggerFactory } from "./LoggerFactory";
+import { Logger } from "./Logger";
+import { Level } from "./Level";
+import * as test from "tape";
 
-describe('LoggerFactory unit tests', () => {
-  let logger: Logger;
+test("LoggerFactory Unit Tests", t => {
+  let logger = LoggerFactory.getLogger("Foo");
+  LoggerFactory.setLevel(logger, Level.INFO);
 
-  beforeEach(() => {
-    logger = LoggerFactory.getLogger('Foo');
-    LoggerFactory.setLevel(logger, Level.INFO);
-  });
+  t.is(logger.getName(), "Foo", "can create a logger");
+  t.is(
+    logger.error("Test entry"),
+    true,
+    "will log error messages when enabled"
+  );
+  t.is(
+    logger.debug("Test entry"),
+    false,
+    "will not log debug messages when disabled"
+  );
 
-  it('Can create a logger', () => {
-    expect(logger.getName()).to.equal('Foo');
-  });
+  LoggerFactory.setLevel(logger, undefined);
+  LoggerFactory.GLOBAL_LEVEL = Level.ALL;
 
-  it('Will log error messages when enabled', () => {
-    expect(logger.error('Test entry')).to.equal(true);
-  });
+  t.equals(
+    logger.getLevel(),
+    LoggerFactory.GLOBAL_LEVEL,
+    "logger will return the GLOBAL_LEVEL when not defined"
+  );
+  t.is(
+    logger.debug("Test entry"),
+    true,
+    "logger will respect the GLOBAL_LEVEL when not defined specifically"
+  );
 
-  it('Will not log debug messages when disabled', () => {
-    expect(logger.debug('Test entry')).to.equal(false);
-  });
-
-  it('Will respect global log level', () => {
-    LoggerFactory.setLevel(logger, undefined);
-    LoggerFactory.GLOBAL_LEVEL = Level.ALL;
-    expect(logger.getLevel()).to.equal(LoggerFactory.GLOBAL_LEVEL);
-    expect(logger.debug('Test entry')).to.equal(true);
-  });
+  t.end();
 });
