@@ -4,8 +4,8 @@ import { fromPromise } from 'rxjs/observable/fromPromise';
 
 import * as WebRequest from 'web-request';
 
-import { LoggerFactory } from './../logging/LoggerFactory';
 import { Logger } from '../logging/Logger';
+import { LoggerFactory } from './../logging/LoggerFactory';
 
 export class HttpUtils {
   private static LOG = LoggerFactory.getLogger('HttpUtils');

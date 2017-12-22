@@ -8,7 +8,7 @@ import * as cf from 'aws-cloudfront-sign';
 import { SignatureOptions } from 'aws-cloudfront-sign';
 
 import { S3Bucket } from './S3Bucket';
-import { CodicomUtils } from '../CodicomUtils';
+import { CommonsUtils } from '../CommonsUtils';
 import { LoggerFactory } from '../logging/LoggerFactory';
 
 export class CloudFrontUtils {
@@ -27,9 +27,9 @@ export class CloudFrontUtils {
     if (privateKeyBucket) {
       this.s3.setDataBucket(privateKeyBucket);
     } else {
-      this.s3.setDataBucket(CodicomUtils.env(CloudFrontUtils.ENV_BUCKET));
+      this.s3.setDataBucket(CommonsUtils.env(CloudFrontUtils.ENV_BUCKET));
     }
-    this.keyPairId = CodicomUtils.env(CloudFrontUtils.ENV_KEY_PAIR_ID);
+    this.keyPairId = CommonsUtils.env(CloudFrontUtils.ENV_KEY_PAIR_ID);
   }
 
   public setKeyPairId(keyPairId: string): void {
@@ -45,9 +45,7 @@ export class CloudFrontUtils {
     expiration?: Moment
   ): Observable<string> {
     return this.getPrivateKey().pipe(
-      map(pk => {
-        return this.toSignedQueryParams(url, pk, expiration);
-      })
+      map(pk => this.toSignedQueryParams(url, pk, expiration))
     );
   }
 

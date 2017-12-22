@@ -17,7 +17,7 @@ import { of } from 'rxjs/observable/of';
 import { map } from 'rxjs/operators';
 import { defaultIfEmpty } from 'rxjs/operators/defaultIfEmpty';
 
-import { CodicomUtils } from '../CodicomUtils';
+import { CommonsUtils } from '../CommonsUtils';
 import { LoggerFactory } from '../logging/LoggerFactory';
 
 export class S3Bucket {
@@ -28,7 +28,7 @@ export class S3Bucket {
 
   constructor(dataBucket?: string) {
     this.dataBucket = !dataBucket
-      ? CodicomUtils.env('DATA_BUCKET_NAME')
+      ? CommonsUtils.env('DATA_BUCKET_NAME')
       : dataBucket;
   }
 

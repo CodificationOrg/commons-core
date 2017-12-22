@@ -2,6 +2,19 @@
 # yarn lockfile v1
 
 
+"@codificationorg/commons@file:.":
+  version "1.0.0"
+  dependencies:
+    "@codificationorg/commons" "file:C:/Users/Bill Weiss/AppData/Local/Yarn/cache/v1/npm-@codificationorg/commons"
+    aws-cloudfront-sign "^2.2.0"
+    aws-sdk "^2.173.0"
+    cheerio "^1.0.0-rc.2"
+    jwt-decode "^2.2.0"
+    moment "^2.18.1"
+    moment-timezone "^0.5.13"
+    rxjs "^5.5.2"
+    web-request "^1.0.7"
+
 "@types/aws-lambda@0.0.15":
   version "0.0.15"
   resolved "https://registry.yarnpkg.com/@types/aws-lambda/-/aws-lambda-0.0.15.tgz#bf9c06edec330c54a85be0006c4c1686f5b62b59"
@@ -751,8 +764,8 @@ rimraf@^2.6.2:
     glob "^7.0.5"
 
 rxjs@^5.5.2:
-  version "5.5.5"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.5.tgz#e164f11d38eaf29f56f08c3447f74ff02dd84e97"
+  version "5.5.6"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.6.tgz#e31fb96d6fd2ff1fd84bcea8ae9c02d007179c02"
   dependencies:
     symbol-observable "1.0.1"
 

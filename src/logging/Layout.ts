@@ -1,5 +1,5 @@
 import { LoggingEvent } from './LoggingEvent';
-import { CodicomUtils } from '../CodicomUtils';
+import { CommonsUtils } from '../CommonsUtils';
 
 export interface Layout {
   format(event: LoggingEvent): string;
@@ -12,7 +12,7 @@ export class BasicLayout implements Layout {
     const optionalParams = event.optionalParams
       ? `${event.optionalParams}`
       : '';
-    return `${CodicomUtils.now().format(
+    return `${CommonsUtils.now().format(
       this.timestampFormat
     )} - ${event.logger.getName()} - ${event.level.getName()} - ${
       event.message

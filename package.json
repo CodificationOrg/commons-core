@@ -1,12 +1,16 @@
 {
   "name": "@codificationorg/commons",
   "version": "1.0.0",
-  "description": "A library of common utilities used in Codification.org projects.",
+  "description":
+    "A library of common utilities used in Codification.org projects.",
   "homepage": "https://bitbucket.org/codificationorg/commons",
   "bugs": "https://bitbucket.org/codificationorg/commons/issues",
   "main": "./lib/index.js",
   "types": "./lib/index",
   "scripts": {
+    "preversion": "yarn test",
+    "version": "yarn build && git add -A .",
+    "build": "yarn clean && tsc",
     "test": "tape -r ts-node/register src/**/*.spec.ts",
     "clean": "rimraf \"lib/**\"",
     "prepublishOnly": "yarn clean && tsc"
@@ -15,10 +19,9 @@
   "author": "William Weiss",
   "license": "Apache-2.0",
   "private": true,
-  "files": [
-    "lib/"
-  ],
+  "files": ["lib/**"],
   "dependencies": {
+    "@codificationorg/commons": "file:../commons",
     "aws-cloudfront-sign": "^2.2.0",
     "aws-sdk": "^2.173.0",
     "cheerio": "^1.0.0-rc.2",

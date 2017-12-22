@@ -1,21 +1,14 @@
 import * as JWT from 'jwt-decode';
 
-export interface UserData {
-  getName(): string;
-  getUsername(): string;
-  getEmail(): string;
-  isMemberOfAny(...groups: string[]): boolean;
-  isMemberOfAll(...groups: string[]): boolean;
-  getGroups(): string[];
-}
+import { UserMetadata } from '../auth/UserMetadata';
 
 export class CognitoUtils {
-  public static toUserData(authorizationHeaderValue: string): UserData {
-    return new CognitoUserData(authorizationHeaderValue);
+  public static toUserMetadata(authorizationHeader: string): UserMetadata {
+    return new CognitoUserMetadata(authorizationHeader);
   }
 }
 
-class CognitoUserData implements UserData {
+class CognitoUserMetadata implements UserMetadata {
   private token: Object;
 
   constructor(jwtToken: string) {

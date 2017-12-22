@@ -3,29 +3,22 @@ import * as moment from 'moment-timezone';
 
 import * as crypto from 'crypto';
 
-export class CodicomUtils {
+export class CommonsUtils {
   public static ENV_STAGE = 'STAGE';
+  public static ENV_PROD_STAGE = 'PROD_STAGE';
 
-  public static STAGE_DEV = 'dev';
-  public static STAGE_PROD = 'prod';
+  public static ENV_TIMEZONE = 'TIMEZONE';
+
+  public static DEFAULT_PROD_STAGE = 'prod';
+  public static DEFAULT_TIME_ZONE = 'America/Los_Angeles';
 
   public static DATE_UNIT = 'days';
-  public static TIME_ZONE = 'America/Los_Angeles';
 
   public static isProd(): boolean {
-    return this.env(this.ENV_STAGE, this.STAGE_DEV) == this.STAGE_PROD;
-  }
-
-  public static corsHeaders(
-    origin: string = '*.codification.org',
-    headers: string = 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-    methods: string = 'POST,OPTIONS,GET,PUT,PATCH,DELETE'
-  ) {
-    return {
-      'Access-Control-Allow-Origin': origin,
-      'Access-Control-Allow-Headers': headers,
-      'Access-Control-Allow-Methods': methods
-    };
+    return (
+      this.env(this.ENV_STAGE) ==
+      this.env(this.ENV_PROD_STAGE, this.DEFAULT_PROD_STAGE)
+    );
   }
 
   public static env(key: string, defaultValue: string = ''): string {
@@ -56,7 +49,7 @@ export class CodicomUtils {
   }
 
   public static now(): Moment {
-    return moment.tz(this.TIME_ZONE);
+    return moment.tz(this.env(this.ENV_TIMEZONE, this.DEFAULT_TIME_ZONE));
   }
 
   public static toMd5Hex(value: string): string {

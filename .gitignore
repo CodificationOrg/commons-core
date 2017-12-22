@@ -32,3 +32,4 @@ nb-configuration.xml
 
 #Local only tests
 src/test.ts
+yarn-error.log
