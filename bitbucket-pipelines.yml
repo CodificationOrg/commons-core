@@ -11,10 +11,11 @@ pipelines:
           script: 
             - git config user.email william@codification.org
             - git config user.name William Weiss
+            - printf "//`node -p \"require('url').parse(process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org').host\"`/:_authToken=${NPM_TOKEN}\nregistry=${NPM_REGISTRY_URL:-https://registry.npmjs.org}\n" >> ~/.npmrc
             - yarn
             - yarn test
             - npm version prerelease --unsafe-perm
-            - npm publish --access public --tag next --unsafe-perm --registry=$NPM_REGISTRY_URL
+            - npm publish --access public --tag next --unsafe-perm
 
   branches:
     dev:
