@@ -1,6 +1,6 @@
 {
   "name": "@codificationorg/commons",
-  "version": "1.0.0-alpha.0",
+  "version": "1.0.0-alpha.1",
   "description":
     "A library of common utilities used in Codification.org projects.",
   "homepage": "https://bitbucket.org/codificationorg/commons",
@@ -11,9 +11,9 @@
     "preversion": "yarn test",
     "version": "yarn build && git add -A .",
     "postversion": "git push && git push --tags",
+    "clean": "rimraf \"lib/**\"",
     "test": "tape -r ts-node/register src/**/*.spec.ts",
-    "build": "yarn clean && tsc",
-    "clean": "rimraf \"lib/**\""
+    "build": "yarn clean && tsc && yarn test"
   },
   "repository": "bitbucket:codificationorg/commons",
   "author": "William Weiss",
