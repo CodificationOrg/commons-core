@@ -2,6 +2,18 @@
 image: billyboingo/docker-pipelines:node
 
 pipelines:
+  custom:
+    prerelease:
+      step:
+        caches:
+          - node
+        script: 
+          - git config user.email william@codification.org
+          - git config user.name William Weiss
+          - yarn
+          - yarn test
+          - npm version prerelease
+          - npm publish --access public --tag next
 
   branches:
     dev:
@@ -11,5 +23,3 @@ pipelines:
           script:
             - yarn
             - yarn test
-            - npm version prerelease
-            - npm publish --access public --tag next
