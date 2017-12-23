@@ -3,8 +3,8 @@ image: billyboingo/docker-pipelines:node
 
 pipelines:
 
-  branches:
-    dev:
+  tags:
+    v*:
       - step:
           caches:
             - node
@@ -15,3 +15,14 @@ pipelines:
             - yarn
             - yarn build
             - npm publish --access public --tag next --unsafe-perm
+
+  branches:
+    dev:
+      - step:
+          caches:
+            - node
+          script:
+            # Build
+            - yarn
+            - yarn clean
+            - yarn test
