@@ -20,7 +20,6 @@
   "private": true,
   "files": ["lib/**"],
   "dependencies": {
-    "@codificationorg/commons": "file:../commons",
     "aws-cloudfront-sign": "^2.2.0",
     "aws-sdk": "^2.173.0",
     "cheerio": "^1.0.0-rc.2",
