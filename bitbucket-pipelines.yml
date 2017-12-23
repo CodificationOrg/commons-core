@@ -14,7 +14,7 @@ pipelines:
             - yarn
             - yarn test
             - npm version prerelease --unsafe-perm
-            - npm publish --access public --tag next --unsafe-perm
+            - npm publish --access public --tag next --unsafe-perm --registry=$NPM_REGISTRY_URL
 
   branches:
     dev:
