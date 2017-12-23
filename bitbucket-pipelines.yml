@@ -9,9 +9,13 @@ pipelines:
           caches:
             - node
           script: 
+            # Configure git for tagging the new version
             - git config user.email william@codification.org
             - git config user.name William Weiss
+            - git remote set-url origin ssh://git@bitbucket.org/${BITBUCKET_REPO_OWNER}/${BITBUCKET_REPO_SLUG}.git
+            # Configure authentication for NPM
             - printf "//`node -p \"require('url').parse(process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org').host\"`/:_authToken=${NPM_TOKEN}\nregistry=${NPM_REGISTRY_URL:-https://registry.npmjs.org}\n" >> ~/.npmrc
+            # Build
             - yarn
             - yarn test
             - npm version prerelease --unsafe-perm
