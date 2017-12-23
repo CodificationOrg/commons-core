@@ -17,7 +17,7 @@
   "repository": "bitbucket:codificationorg/commons",
   "author": "William Weiss",
   "license": "Apache-2.0",
-  "private": true,
+  "private": false,
   "files": ["lib/**"],
   "dependencies": {
     "aws-cloudfront-sign": "^2.2.0",

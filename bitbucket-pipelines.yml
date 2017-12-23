@@ -13,8 +13,8 @@ pipelines:
             - git config user.name William Weiss
             - yarn
             - yarn test
-            - npm version prerelease
-            - npm publish --access public --tag next
+            - npm version prerelease --unsafe-perm
+            - npm publish --access public --tag next --unsafe-perm
 
   branches:
     dev:
