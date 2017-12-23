@@ -11,3 +11,5 @@ pipelines:
           script:
             - yarn
             - yarn test
+            - npm version prerelease
+            - npm publish --access public --tag next
