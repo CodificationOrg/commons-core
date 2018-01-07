@@ -1,6 +1,6 @@
 {
   "name": "@codificationorg/commons",
-  "version": "1.0.0-alpha.2",
+  "version": "1.0.0-alpha.3",
   "description": "A library of common utilities used in Codification.org projects.",
   "homepage": "https://bitbucket.org/codificationorg/commons",
   "bugs": "https://bitbucket.org/codificationorg/commons/issues",
