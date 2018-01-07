@@ -1,1 +1,0 @@
-export { UserMetadata } from './UserMetadata';
