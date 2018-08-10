@@ -34,11 +34,7 @@ export class Logger {
 
   private static readonly LOGGER = winston.createLogger({
     format: Logger.FORMAT,
-    level: Logger.findLoggerLevel(),
+    level: Config.get('LOGGING_LEVEL', 'error'),
     transports: [new winston.transports.Console()],
   });
-
-  private static findLoggerLevel(): string {
-    return Config.get('LOGGING_LEVEL', 'error');
-  }
 }
