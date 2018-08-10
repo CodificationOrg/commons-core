@@ -1,6 +1,6 @@
 {
   "name": "@codificationorg/commons-core",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0",
   "description": "A library of common utilities used in Codification.org projects.",
   "homepage": "https://github.com/CodificationOrg/commons-core",
   "bugs": "https://github.com/CodificationOrg/commons-core/issues",
@@ -23,7 +23,14 @@
     "type": "git",
     "url": "git@github.com:CodificationOrg/commons-core.git"
   },
-  "keywords": ["common","utilities","support","logging","md5","codification"],
+  "keywords": [
+    "common",
+    "utilities",
+    "support",
+    "logging",
+    "md5",
+    "codification"
+  ],
   "author": {
     "name": "William Weiss",
     "url": "https://github.com/wweiss"
