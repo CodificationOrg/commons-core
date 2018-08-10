@@ -1,6 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { race } from 'rxjs/observable/race';
 import { Observer } from 'rxjs/Observer';
+import { Logger } from './Logger';
 
 export class ObserverUtils {
   public static timeout<T>(
@@ -16,7 +17,7 @@ export class ObserverUtils {
     return Observable.create((observer: Observer<T>) => {
       const id = setTimeout(() => {
         clearTimeout(id);
-        console.warn(`Timed out after ${timeoutMillis}ms waiting for results of ${title}`);
+        Logger.warn(`Timed out after ${timeoutMillis}ms waiting for results of ${title}`);
         if (resolveAsNull) {
           observer.next(null);
           observer.complete();

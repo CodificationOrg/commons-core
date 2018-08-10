@@ -30,6 +30,7 @@ nb-configuration.xml
 .project
 .classpath
 
-#Local only tests
+#Local only
+.env
 src/test.ts
 yarn-error.log

@@ -7,9 +7,8 @@ export class Config {
 
   public static get(key: string, defaultValue: string = ''): string {
     let rval = this.config[key] ? this.config[key] : process.env[key];
-    if (rval == null) {
+    if (!rval) {
       rval = defaultValue;
-      console.warn(`Config [${key}] not found, returning default value.`);
     }
     return rval;
   }
