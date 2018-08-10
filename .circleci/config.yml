@@ -18,8 +18,8 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Set Pacific Time Zone
-        command: 'echo ''America/Los_Angeles'' | sudo tee -a /etc/timezone; sudo dpkg-reconfigure -f noninteractive tzdata;'
+          name: Set Pacific Time Zone
+          command: 'echo ''America/Los_Angeles'' | sudo tee -a /etc/timezone; sudo dpkg-reconfigure -f noninteractive tzdata;'
     - restore_cache:
         keys:
           - v1-dep-{{ .Branch }}-
