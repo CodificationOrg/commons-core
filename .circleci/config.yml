@@ -1,6 +1,6 @@
 defaults: &defaults
   docker:
-      - image: circleci/node:8.11.1
+    - image: circleci/node:8.11.1
 
   working_directory: ~/codification/commons-core
   parallelism: 1
@@ -10,8 +10,6 @@ defaults: &defaults
     CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
     CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
 
-  
-
 version: 2
 
 jobs:
@@ -20,33 +18,74 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Set Pacific Time Zone"
-          command: 'echo ''America/Los_Angeles'' | sudo tee -a /etc/timezone; sudo dpkg-reconfigure -f noninteractive tzdata;'
+          name: 'Set Pacific Time Zone'
+          command: "echo 'America/Los_Angeles' | sudo tee -a /etc/timezone; sudo dpkg-reconfigure -f noninteractive tzdata;"
       - restore_cache:
+          name: 'Restore Yarn Package Cache'
           keys:
-            - v1-dep-{{ .Branch }}-
-            - v1-dep-master-
-            - v1-dep-
+            - yarn-packages-{{ checksum "yarn.lock" }}
       - run:
-          name: "Install dependencies"
-          command: yarn
+          name: 'Install dependencies'
+          command: yarn install
       - save_cache:
-          key: v1-dep-{{ .Branch }}-{{ epoch }}
+          name: 'Save Yarn Package Cache'
+          key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - ./node_modules
+            - ~/.cache/yarn
       - run:
-          name: "Clean & Build"
+          name: 'Clean & Build'
           command: yarn build
       - persist_to_workspace:
           root: ~/codification
           paths:
             - commons-core
-          
+
+  test:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/codification
+      - run:
+          name: 'Linting and Testing'
+          command: yarn test
+
+  deploy:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: 'Set Pacific Time Zone'
+          command: "echo 'America/Los_Angeles' | sudo tee -a /etc/timezone; sudo dpkg-reconfigure -f noninteractive tzdata;"
+      - restore_cache:
+          name: 'Restore Yarn Package Cache'
+          keys:
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: 'Authenticate with registry'
+          command: printf "//`node -p \"require('url').parse(process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org').host\"`/:_authToken=${NPM_TOKEN}\nregistry=${NPM_REGISTRY_URL:-https://registry.npmjs.org}\n" >> ~/.npmrc
+      - run:
+          name: 'Publish package'
+          command: yarn publish
+
 workflows:
   version: 2
   just-build:
     jobs:
       - build:
           filters:
+            branch:
+              only: dev
+      - test:
+          requires:
+            - build
+          filters:
+            branch:
+              only: dev
+
+  tagged-build:
+    jobs:
+      - deploy:
+          context: org-codification-global
+          filters:
             tags:
-              only: /.*/
+              only: /v[0-9]+(\.[0-9]+)*/

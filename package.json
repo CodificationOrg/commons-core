@@ -12,10 +12,11 @@
     "version": "yarn build && git add -A .",
     "postversion": "git push && git push --tags",
     "clean": "gulp clean",
-    "test": "tape -r dotenv/config -r ts-node/register \"src/**/*.spec.ts\" | faucet",
+    "test": "yarn lint && tape -r dotenv/config -r ts-node/register \"src/**/*.spec.ts\" | faucet",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
-    "build": "gulp build"
+    "build": "gulp build",
+    "prepublishOnly": "yarn test && yarn build"
   },
   "repository": {
     "type": "git",
