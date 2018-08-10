@@ -1,6 +1,4 @@
 export class Config {
-  private static config: { [key: string]: string } = {};
-
   public static put(key: string, value: string): string {
     const rval = this.get(key);
     this.config[key] = value;
@@ -15,4 +13,6 @@ export class Config {
     }
     return rval;
   }
+
+  private static config: { [key: string]: string } = {};
 }

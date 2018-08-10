@@ -10,25 +10,33 @@
     "preversion": "yarn test",
     "version": "yarn build && git add -A .",
     "postversion": "git push && git push --tags",
-    "clean": "rimraf \"lib/**\"",
-    "test": "tape -r ts-node/register src/**/*.spec.ts",
-    "build": "yarn clean && tsc && yarn test"
+    "clean": "gulp clean",
+    "test": "tape -r ts-node/register \"src/**/*.spec.ts\" | faucet",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "build": "gulp build"
   },
   "repository": "bitbucket:codificationorg/commons",
   "author": "William Weiss",
   "license": "Apache-2.0",
   "private": false,
-  "files": [
-    "lib/**"
-  ],
-  "dependencies": {},
+  "dependencies": {
+    "rxjs": "^5.5.9"
+  },
   "devDependencies": {
     "@types/node": "^8.0.16",
     "@types/tape": "^4.2.31",
-    "rimraf": "^2.6.2",
+    "del": "^3.0.0",
+    "dotenv": "^5.0.1",
+    "faucet": "^0.0.1",
+    "gulp": "^4.0.0",
+    "gulp-typescript": "^5.0.0-alpha.3",
+    "merge2": "^1.2.2",
+    "prettier": "^1.14.0",
     "tape": "^4.8.0",
     "ts-node": "^4.0.2",
     "tslint": "^5.7.0",
+    "tslint-config-prettier": "^1.14.0",
     "typescript": "^2.6.2"
   }
 }
