@@ -73,13 +73,13 @@ workflows:
     jobs:
       - build:
           filters:
-            branch:
+            branches:
               only: dev
       - test:
           requires:
             - build
           filters:
-            branch:
+            branches:
               only: dev
 
   tagged-build:
