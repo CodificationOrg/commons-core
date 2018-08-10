@@ -2,6 +2,7 @@
 target/
 bin/
 lib/
+test-results/
 
 # Node Modules
 node_modules/

@@ -1,5 +1,6 @@
 src/
 .circleci/
+test-results/
 .env
 *.log
 .yarnrc
@@ -7,3 +8,5 @@ tsconfig.json
 tslint.json
 .prettierrc
 .yarnclean
+yarn.lock
+gulpfile.js

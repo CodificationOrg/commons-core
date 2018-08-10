@@ -41,8 +41,10 @@ jobs:
       - attach_workspace:
           at: ~/codification
       - run:
-          name: 'Linting and Testing'
+          name: 'Run Tests'
           command: yarn test
+      - store_test_results:
+          path: test-results
 
   deploy:
     <<: *defaults
