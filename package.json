@@ -8,20 +8,22 @@
   "types": "./lib/index.d.ts",
   "typings": "./lib/index.d.ts",
   "scripts": {
-    "preversion": "yarn format && yarn lint && yarn test",
-    "version": "yarn build && git add -A .",
-    "postversion": "git push && git push --tags",
     "clean": "gulp clean",
-    "test": "yarn lint && tape -r dotenv/config -r ts-node/register \"src/**/*.spec.ts\" | faucet",
+    "test": "tape -r dotenv/config -r ts-node/register \"src/**/*.spec.ts\" | faucet",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "build": "gulp build",
-    "prepublishOnly": "yarn test && yarn build"
+    "prepare": "yarn build",
+    "prepublishOnly": "yarn test && yarn lint",
+    "preversion": "yarn lint && yarn test",
+    "version": "yarn format && git add -A .",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:CodificationOrg/commons-core.git"
   },
+  "keywords": ["common","utilities","support","logging","md5","codification"],
   "author": {
     "name": "William Weiss",
     "url": "https://github.com/wweiss"

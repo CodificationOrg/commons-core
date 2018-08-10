@@ -1,0 +1,9 @@
+src/
+.circleci/
+.env
+*.log
+.yarnrc
+tsconfig.json
+tslint.json
+.prettierrc
+.yarnclean
