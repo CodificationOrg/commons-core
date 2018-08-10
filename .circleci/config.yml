@@ -6,12 +6,7 @@ defaults: &defaults
   parallelism: 1
   shell: /bin/bash --login
 
-  environment:
-    CIRCLE_ARTIFACTS: /tmp/circleci-artifacts
-    CIRCLE_TEST_REPORTS: /tmp/circleci-test-results
-
 version: 2
-
 jobs:
   build:
     <<: *defaults
@@ -52,14 +47,8 @@ jobs:
   deploy:
     <<: *defaults
     steps:
-      - checkout
-      - run:
-          name: 'Set Pacific Time Zone'
-          command: "echo 'America/Los_Angeles' | sudo tee -a /etc/timezone; sudo dpkg-reconfigure -f noninteractive tzdata;"
-      - restore_cache:
-          name: 'Restore Yarn Package Cache'
-          keys:
-            - yarn-packages-{{ checksum "yarn.lock" }}
+      - attach_workspace:
+          at: ~/codification
       - run:
           name: 'Authenticate with registry'
           command: printf "//`node -p \"require('url').parse(process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org').host\"`/:_authToken=${NPM_TOKEN}\nregistry=${NPM_REGISTRY_URL:-https://registry.npmjs.org}\n" >> ~/.npmrc
@@ -69,23 +58,24 @@ jobs:
 
 workflows:
   version: 2
-  just-build:
+  build-test-deploy:
     jobs:
       - build:
           filters:
-            branches:
-              only: dev
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
       - test:
           requires:
             - build
           filters:
-            branches:
-              only: dev
-
-  tagged-build:
-    jobs:
+            tags:
+              only: /v[0-9]+(\.[0-9]+)*/
       - deploy:
           context: org-codification-global
+          requires:
+            - test
           filters:
             tags:
               only: /v[0-9]+(\.[0-9]+)*/
+            branches:
+              ignore: /.*/
