@@ -1,13 +1,14 @@
 {
-  "name": "@codificationorg/commons",
+  "name": "@codificationorg/commons-core",
   "version": "1.0.0-alpha.3",
   "description": "A library of common utilities used in Codification.org projects.",
-  "homepage": "https://bitbucket.org/codificationorg/commons",
-  "bugs": "https://bitbucket.org/codificationorg/commons/issues",
+  "homepage": "https://github.com/CodificationOrg/commons-core",
+  "bugs": "https://github.com/CodificationOrg/commons-core/issues",
   "main": "./lib/index.js",
-  "types": "./lib/index",
+  "types": "./lib/index.d.ts",
+  "typings": "./lib/index.d.ts",
   "scripts": {
-    "preversion": "yarn test",
+    "preversion": "yarn format && yarn lint && yarn test",
     "version": "yarn build && git add -A .",
     "postversion": "git push && git push --tags",
     "clean": "gulp clean",
@@ -16,8 +17,14 @@
     "lint": "tslint -p tsconfig.json",
     "build": "gulp build"
   },
-  "repository": "bitbucket:codificationorg/commons",
-  "author": "William Weiss",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CodificationOrg/commons-core.git"
+  },
+  "author": {
+    "name": "William Weiss",
+    "url": "https://github.com/wweiss"
+  },
   "license": "Apache-2.0",
   "private": false,
   "dependencies": {
