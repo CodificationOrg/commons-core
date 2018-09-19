@@ -8,6 +8,8 @@ export class Level {
   public static readonly TRACE = new Level('TRACE', 6);
   public static readonly ALL = new Level('ALL', 7);
 
+  public static readonly LEVELS = [Level.FATAL, Level.ERROR, Level.WARN, Level.INFO, Level.DEBUG, Level.TRACE];
+
   public static toLevel(level: string | number): Level {
     let rval: Level;
     if (typeof level === 'number' && level >= this.OFF.priority && level <= this.ALL.priority) {
@@ -18,16 +20,7 @@ export class Level {
     return rval;
   }
 
-  private static readonly ALL_LEVELS = [
-    Level.OFF,
-    Level.FATAL,
-    Level.ERROR,
-    Level.WARN,
-    Level.INFO,
-    Level.DEBUG,
-    Level.TRACE,
-    Level.ALL,
-  ];
+  private static readonly ALL_LEVELS = [Level.OFF, ...Level.LEVELS, Level.ALL];
 
   private levelName: string;
   private levelPriority: number;

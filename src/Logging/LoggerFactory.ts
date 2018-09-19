@@ -43,6 +43,12 @@ export class LoggerFactory {
     return logger;
   }
 
+  public static logEnabledLevels(logger: Logger): void {
+    Level.LEVELS.forEach(level => {
+      logger[level.name](`${level.name}: ENABLED`);
+    });
+  }
+
   private static LOGGERS = [];
 
   private static init(): void {
