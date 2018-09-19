@@ -30,22 +30,18 @@ export class LoggerFactory {
   }
 
   public static setLevel(logger: Logger, level: Level): Logger {
-    if (logger instanceof DefaultLoggerImpl) {
-      (logger as DefaultLoggerImpl).level = level;
-    }
+    logger.level = level;
     return logger;
   }
 
   public static setAppender(logger: Logger, appender: Appender): Logger {
-    if (logger instanceof DefaultLoggerImpl) {
-      (logger as DefaultLoggerImpl).appender = appender;
-    }
+    logger.appender = appender;
     return logger;
   }
 
   public static logEnabledLevels(logger: Logger): void {
     Level.LEVELS.forEach(level => {
-      logger[level.name](`${level.name}: ENABLED`);
+      logger[level.name.toLowerCase()](`${level.name}: ENABLED`);
     });
   }
 
