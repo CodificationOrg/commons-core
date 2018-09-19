@@ -13,5 +13,13 @@ export class Config {
     return rval;
   }
 
+  public static getRequired(key: string, errorMsg?: string): string {
+    const rval = Config.get(key);
+    if (!rval) {
+      throw new Error(errorMsg ? errorMsg : `Required config value [${key}] is missing.`);
+    }
+    return rval;
+  }
+
   private static config: { [key: string]: string } = {};
 }
